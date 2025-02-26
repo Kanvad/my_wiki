@@ -6,7 +6,7 @@
 
 -   Connect to wifi
 
-```
+```bash
 iwctl device list
 
 iwctl station wlan0 connect "your wifi name" password "your wifi password"
@@ -14,13 +14,13 @@ iwctl station wlan0 connect "your wifi name" password "your wifi password"
 
 -   Check internet connection
 
-```
+```bash
 ping 1.1.1.1
 ```
 
 -   Select an appropriate mirror
 
-```
+```bash
 pacman -Syy
 pacman -S reflector
 reflector --latest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
@@ -30,37 +30,38 @@ reflector --latest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlis
 
 -   List all the disk and partitions on your system
 
-```
+```bash
 lsblk
 ```
 
 -   Create a partition
 
-```
+```bash
 fdisk /dev/sdX
 Create a new partition: n
 ```
 
 > Change sdX to your disk name
 
-> An EFI system partition of 1 GiB size<br>
-> A SWAP partition of 4 GiB size (equal to your RAM)<br>
-> A root partition of 25 GiB size (minimum)
+> An EFI system partition of 1 GB size<br>
+> A SWAP partition of 4 GB size (equal to your RAM)<br>
+> A root partition of 25 GB size (minimum)
 
 -   Change the partition type
 
-```
+```bash
 change the partition type: t
 
 number: 1 <EFI system>
 number: 19 <SWAP>
+number: 83 <Linux filesystem>
 
 write the changes: w
 ```
 
 -   Format the partition
 
-```
+```bash
 mkfs.fat -F 32 /dev/sdX1
 mkswap /dev/sdX2
 mkfs.ext4 /dev/sdX3
@@ -68,21 +69,21 @@ mkfs.ext4 /dev/sdX3
 
 -   Mount the partition
 
-```
+```bash
 mount /dev/sdX3 /mnt
-mount --mkdir /dev/sdX1 /mnt/boot
+mount /dev/sdX1 --mkdir /mnt/boot
 swapon /dev/sdX2
 ```
 
 -   Check the partitions again
 
-```
+```bash
 lsblk
 ```
 
 -   Result
 
-```
+```bash
 /dev/sdX1 /mnt/boot
 /dev/sdX2 [SWAP]
 /dev/sdX3 /mnt
@@ -91,35 +92,40 @@ lsblk
 > [!CAUTION]<br>
 > If error or fail, format the partition and try again.
 
-> /dev/sdX3 root partition<br>
 > /dev/sdX1 EFI system partition<br>
-> /dev/sdX2 SWAP partition
+> /dev/sdX2 SWAP partition<br>
+> /dev/sdX3 root partition<br>
 
 ### Install Arch Linux
 
-```
-pacstrap /mnt base base-devel linux linux-firmware linux-headers networkmanager git nano grub os-prober efibootmgr dosfstools mtools vim sudo
+```bash
+pacstrap -K /mnt base base-devel linux linux-firmware linux-headers networkmanager grub efibootmgr nano sudo
 ```
 
+> more packages
+> ```bash
+> git vim neofetch bash-completion intel-ucode (or amd-ucode)
 > ```
-> neofetch bash-completion intel-ucode (or amd-ucode)
+> for dual boot
+> ```bash
+> os-prober dosfstools mtools
 > ```
 
 -   After installation of the base system
 
-```
+```bash
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ```
 
-> [!TIP]<br>
-> If dual boot
+> [!NOTE]<br>
+> for dual boot
 >
-> ```
+> ```bash
 > echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 > ```
 
-```
+```bash
 mkdir /boot/efi
 mount /dev/sdX1 /boot/efi
 
@@ -130,13 +136,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 -   Enable NetworkManager auto start
 
-```
+```bash
 systemctl enable NetworkManager
 ```
 
 -   Set timezone
 
-```
+```bash
 ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 hwclock --systohc
 ```
@@ -145,36 +151,36 @@ hwclock --systohc
 
 -   Set root password
 
-```
+```bash
 passwd
 ```
 
 -   Add user and set password
 
-```
+```bash
 useradd -m -G wheel your_username
 passwd your_username
 
 EDITOR=nano visudo
 ```
 
-> Change your_username to your username<br>
 > Uncomment the line %wheel ALL=(ALL) ALL to allow members of the wheel group to execute any command.
 
 -   Setup locale
 
-```
+```bash
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 or
 sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
-
+```
+```bash
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 locale-gen
 ```
 
 -   Setup hostname
 
-```
+```bash
 echo "arch" > /etc/hostname
 
 echo -e "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\tmyarch.localdomain\tmyarch" >> /etc/hosts
@@ -184,17 +190,20 @@ nano /etc/hosts
 
 > Change arch to your hostname
 >
-> ```
+> ```bash
 > 127.0.0.1	localhost
 > ::1       localhost
 > 127.0.1.1	arch
 > ```
- ### Reboot
 
-```
+### Reboot
+
+```bash
 exit
 umount -R /mnt
 shutdown now
 ```
+
 ## Done :dizzy_face:
+
 [Arch Linux Wiki](https://wiki.archlinux.org/title/Installation_guide)
