@@ -160,7 +160,8 @@ passwd
 ```bash
 useradd -m -G wheel your_username
 passwd your_username
-
+```
+```bash
 EDITOR=nano visudo
 ```
 
@@ -182,7 +183,8 @@ locale-gen
 
 ```bash
 echo "arch" > /etc/hostname
-
+```
+```bash
 echo -e "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\tmyarch.localdomain\tmyarch" >> /etc/hosts
 or
 nano /etc/hosts
