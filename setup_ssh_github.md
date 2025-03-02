@@ -39,6 +39,10 @@ ssh-add c:/Users/YOU/.ssh/id_ed25519
 ```
 > Change **c:/Users/YOU/.ssh/id_ed25519** to your path
 ### 3. Add the SSH public key to your account on GitHub.
+* Copy the SSH public key from your clipboard
+
+> copy from file "id_ed25519.pub"
+
 * Open settings on GitHub website
   ![image](asset/images/ssh1.png)
 

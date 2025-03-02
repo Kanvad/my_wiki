@@ -9,21 +9,13 @@
 ```bash
 iwctl device list
 
-iwctl station wlan0 connect "your wifi name" password "your wifi password"
+iwctl station wlan0 connect "your wifi name"
 ```
 
 -   Check internet connection
 
 ```bash
-ping 1.1.1.1
-```
-
--   Select an appropriate mirror
-
-```bash
-pacman -Syy
-pacman -S reflector
-reflector --latest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+ping archlinux.org
 ```
 
 ### Partition the disks
@@ -143,11 +135,11 @@ systemctl enable NetworkManager
 -   Set timezone
 
 ```bash
-ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 hwclock --systohc
 ```
 
-> Change Asia/Taipei to your timezone
+> Change Asia/Ho_Chi_Minh to your timezone
 
 -   Set root password
 
@@ -165,14 +157,14 @@ passwd your_username
 EDITOR=nano visudo
 ```
 
-> Uncomment the line %wheel ALL=(ALL) ALL to allow members of the wheel group to execute any command.
+> Uncomment the line<br>
+> ``` %wheel ALL=(ALL) ALL ```<br>
+> to allow members of the wheel group to execute any command.
 
 -   Setup locale
 
 ```bash
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-or
-sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 ```
 ```bash
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
@@ -185,8 +177,6 @@ locale-gen
 echo "arch" > /etc/hostname
 ```
 ```bash
-echo -e "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\tmyarch.localdomain\tmyarch" >> /etc/hosts
-or
 nano /etc/hosts
 ```
 
@@ -205,6 +195,11 @@ exit
 umount -R /mnt
 shutdown now
 ```
+
+### Desktop environments
+
+- [Desktop Environment](https://wiki.archlinux.org/title/Desktop_environment)
+- Choose your favorite desktop environment :zzz:
 
 ## Done :dizzy_face:
 
