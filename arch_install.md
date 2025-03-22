@@ -9,6 +9,10 @@
 ```bash
 iwctl device list
 
+iwctl station wlan0 power on
+
+iwctl station wlan0 scan
+
 iwctl station wlan0 connect "your wifi name"
 ```
 
@@ -33,7 +37,7 @@ fdisk /dev/sdX
 Create a new partition: n
 ```
 
-> Change sdX to your disk name
+> Change sdX to your disk name or use ```cfdisk```
 
 > An EFI system partition of 1 GB size<br>
 > A SWAP partition of 4 GB size (equal to your RAM)<br>
