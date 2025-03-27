@@ -1,18 +1,15 @@
 ## Install Arch Linux (minimal) :relaxed:
 
-## Not use acrhinstall script
+## Manual installation without archinstall script
 
 ### After boot from USB
 
--   Connect to wifi
+-   Connect to Wifi
 
 ```bash
 iwctl device list
-
-iwctl station wlan0 power on
-
 iwctl station wlan0 scan
-
+iwctl station wlan0 get-networks
 iwctl station wlan0 connect "your wifi name"
 ```
 
@@ -95,17 +92,8 @@ lsblk
 ### Install Arch Linux
 
 ```bash
-pacstrap -K /mnt base base-devel linux linux-firmware linux-headers networkmanager grub efibootmgr nano sudo
+pacstrap -K /mnt base base-devel linux linux-firmware linux-headers
 ```
-
-> more packages
-> ```bash
-> git vim neofetch bash-completion intel-ucode (or amd-ucode)
-> ```
-> for dual boot
-> ```bash
-> os-prober dosfstools mtools
-> ```
 
 -   After installation of the base system
 
@@ -113,6 +101,15 @@ pacstrap -K /mnt base base-devel linux linux-firmware linux-headers networkmanag
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ```
+
+> more packages
+> ```bash
+> pacman -S networkmanager grub efibootmgr nano sudo git vim neofetch bash-completion intel-ucode (or amd-ucode)
+> ```
+> for dual boot
+> ```bash
+> os-prober
+> ```
 
 > [!NOTE]<br>
 > for dual boot
@@ -179,8 +176,7 @@ locale-gen
 
 ```bash
 echo "arch" > /etc/hostname
-```
-```bash
+
 nano /etc/hosts
 ```
 
