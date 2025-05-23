@@ -1,2 +1,5 @@
-## No code here!
-### Wiki setup something :zzz:
+## Wiki setup something :zzz:
+
+- [Setup ssh github](./setup_ssh_github.md)
+- [Arch minimal](./arch_install.md)
+- [Thumbnail Youtube](./downloadfromyoutube.md)

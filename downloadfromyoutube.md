@@ -1,4 +1,4 @@
-## Download thumnail Youtube
+## Download thumbnail Youtube
 
 - Copy id video
 > www.youtube.com/watch?v=ID_VIDEO<br>
@@ -17,3 +17,6 @@ https://img.youtube.com/vi/ID_VIDEO/hqdefault.jpg
 https://img.youtube.com/vi/ID_VIDEO/sddefault.jpg
 ```
 > Example: https://img.youtube.com/vi/MA8flZE-bT8/maxresdefault.jpg
+
+## Tool
+[ytThumbnail]()

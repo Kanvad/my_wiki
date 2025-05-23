@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>YouTube ID Extractor</title>
+</head>
+
+<body>
+    <h1>YouTube ID Extractor and Thumbnail</h1>
+    <form id="youtubeForm">
+        <label for="youtubeLink">YouTube video link: </label>
+        <input type="text" id="youtubeLink" name="youtubeLink">
+        <button type="submit">Extract ID</button>
+        <!-- <button id="copyButton">Copy ID</button> -->
+         <button id="clearButton" type="reset">Clear</button>
+    </form>
+
+    <div id="result">
+        <h4 id="videoId">Video ID:</h4>
+        <a id="thumbnailLink" href="#" target="_blank"></a>
+    </div>
+
+    <script>
+        document.getElementById('youtubeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const link = document.getElementById('youtubeLink').value;
+            const videoId = extractVideoId(link);
+            document.getElementById('videoId').innerText = 'Video ID: ' + videoId;
+
+            if (videoId) {
+                const thumbnailLink = document.getElementById('thumbnailLink');
+                thumbnailLink.href = 'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
+                thumbnailLink.innerText = thumbnailLink.href;
+            } else {
+                document.getElementById('thumbnailLink').href = '#';
+                document.getElementById('thumbnailLink').innerText = '';
+            }
+        });
+
+        // document.getElementById('copyButton').addEventListener('click', function (event) {
+        //     const videoId = document.getElementById('result').innerText.replace('Video ID: ', '');
+        //     navigator.clipboard.writeText(videoId);
+        // });
+
+        document.getElementById('clearButton').addEventListener('click', function (event) {
+            document.getElementById('videoId').innerText = 'Video ID:';
+            document.getElementById('thumbnailLink').href = '#';
+            document.getElementById('thumbnailLink').innerText = '';
+        });
+
+        function extractVideoId(link) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const match = link.match(regex);
+            return match ? match[1] : null;
+        }
+    </script>
+
+</body>
+
+</html>
