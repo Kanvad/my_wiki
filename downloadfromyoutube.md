@@ -19,4 +19,4 @@ https://img.youtube.com/vi/ID_VIDEO/sddefault.jpg
 > Example: https://img.youtube.com/vi/MA8flZE-bT8/maxresdefault.jpg
 
 ## Tool
-[ytThumbnail]()
+[ytThumbnail](https://raw.githack.com/Kanvad/my_wiki/main/tool/ytTool/index.html)
