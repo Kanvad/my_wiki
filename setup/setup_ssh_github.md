@@ -44,7 +44,7 @@ ssh-add c:/Users/YOU/.ssh/id_ed25519
 > copy from file "id_ed25519.pub"
 
 * Open settings on GitHub website
-  ![image](asset/images/ssh1.png)
+  ![image](../asset/images/ssh1.png)
 
 ### Done :expressionless:
 
